@@ -12,7 +12,8 @@ Anthropic's 2026 "global workspace" result. Everything runs on a single T4 GPU.*
 > entangled-but-decodable middle is where meaning is *worked on*. Deleting **one** middle
 > layer barely dents generation; deleting the **whole band** collapses reasoning while
 > leaving shallow recall intact — the same asymmetry Anthropic report when they ablate the
-> **J-space / global workspace** [10].
+> **J-space / global workspace** [10]. Across **100 queries** (§6b), removing the band breaks
+> **creative/abstract generation first and single-step recall last**.
 
 ---
 
@@ -155,6 +156,53 @@ blue collar, a blue collar…"* — the **word** "blue" survived, the **explanat
 
 ---
 
+## 6b. Experiment 5 — scaling to 100 queries, and *which* capability breaks first
+
+Experiments 3–4 used 8 prompts. Here we repeat both on **100 queries**, balanced across
+five capability types (20 each: **recall, reasoning, math, translation, creative**), and add
+the question the workspace paper really cares about: *when you remove the band, does
+**reasoning** break before **recall**?* (Raw per-query numbers: [`per_query_results.csv`](figures/per_query_results.csv)
+/ [`.json`](figures/per_query_results.json); aggregates in [`metrics_100.json`](figures/metrics_100.json).)
+
+**Single-layer sweep, now with variance bands** — the early cliff is rock-solid:
+
+![Single-layer ablation over 100 queries](figures/ablation_sweep_100.png)
+
+`L0` → KL 17.2 / top-1 7%; `L1` → KL 12.6 / top-1 24%; **every layer `L2–L29` sits at top-1
+89–94%** (KL ≈ 0.1); only the final layer creeps up (`L31`: KL 1.18 / top-1 81%). Across 100
+queries, exactly two layers are individually load-bearing.
+
+**Cumulative band removal** — the same graceful-then-catastrophic collapse, averaged over 100:
+
+![Cumulative removal over 100 queries](figures/cumulative_100.png)
+
+| layers removed | 1 | 2 | 4 | 6 | 8 | 10 | 12 | 14 |
+|---|---|---|---|---|---|---|---|---|
+| KL | 0.18 | 0.39 | 1.5 | 3.9 | 5.6 | 9.9 | 13.9 | 16.9 |
+| top-1 | 91% | 86% | 79% | 67% | 54% | 40% | 22% | 12% |
+
+**Which capability breaks first?** Splitting the band-removal effect by query type:
+
+![Which capability breaks first, by type](figures/by_category.png)
+
+Through the informative mid-range (4–10 layers removed) the ordering is consistent:
+
+| layers removed | recall | math | reasoning | translation | creative |
+|---|---|---|---|---|---|
+| 4 | **87%** | 84% | 76% | 81% | 69% |
+| 6 | **76%** | 73% | 64% | 63% | 59% |
+| 8 | **60%** | 56% | 55% | 51% | 48% |
+
+**Single-step recall is the most robust; open-ended / creative generation collapses first**,
+with reasoning and translation in between. That's the direction Anthropic's workspace result
+predicts — abstract, generative capability leans hardest on the middle band, shallow recall
+leans on it least. Two honest caveats: the separation is **graded, not on/off**, and beyond
+~12 layers removed *everything* converges toward collapse (the ordering gets noisy when the
+model is already broken). The metric is top-1 agreement with the intact model's own greedy
+continuation — a proxy for "output preserved," not a correctness grade.
+
+---
+
 ## 7. The connection: a blunt version of the "global workspace"
 
 Anthropic's **"Verbalizable Representations Form a Global Workspace in Language Models"**
@@ -194,7 +242,8 @@ That's where the workspace lives.
 ```bash
 # On the GPU box (VM):
 python server.py --load-4bit                 # FastAPI on :8000
-python experiments/run_experiments.py        # → results/*.png + metrics.json
+python experiments/run_experiments.py        # UMAP grid, separability, ablation (8-prompt)
+python experiments/run_queries100.py         # 100-query sweep + per-category + CSV/JSON
 
 # From your laptop: tunnel + open ui.html, ablate any set of layers interactively
 gcloud compute ssh <vm> -- -N -L 8000:localhost:8000
