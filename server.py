@@ -90,19 +90,28 @@ def load_model(load_4bit: bool):
 
     tok = AutoTokenizer.from_pretrained(MODEL_ID, token=token)
 
+    # Turing GPUs (e.g. T4) have no native bf16 -> use fp16 there.
+    compute_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+
     kwargs = dict(token=token, device_map="cuda")
     if load_4bit:
         from transformers import BitsAndBytesConfig
 
         kwargs["quantization_config"] = BitsAndBytesConfig(
             load_in_4bit=True,
-            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_compute_dtype=compute_dtype,
             bnb_4bit_quant_type="nf4",
         )
     else:
-        kwargs["torch_dtype"] = torch.bfloat16
+        # transformers>=5 renamed `torch_dtype` -> `dtype`; fall back for older.
+        kwargs["dtype"] = compute_dtype
 
-    mdl = AutoModelForCausalLM.from_pretrained(MODEL_ID, **kwargs)
+    try:
+        mdl = AutoModelForCausalLM.from_pretrained(MODEL_ID, **kwargs)
+    except TypeError:
+        if "dtype" in kwargs:
+            kwargs["torch_dtype"] = kwargs.pop("dtype")
+        mdl = AutoModelForCausalLM.from_pretrained(MODEL_ID, **kwargs)
     mdl.eval()
 
     term = [tok.eos_token_id, tok.convert_tokens_to_ids("<|eot_id|>")]
@@ -118,9 +127,12 @@ def build_inputs(system_prompt: str, prompt: str):
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": prompt})
-    ids = tokenizer.apply_chat_template(
+    out = tokenizer.apply_chat_template(
         messages, add_generation_prompt=True, return_tensors="pt"
     )
+    # transformers>=5 returns a BatchEncoding (not a dict subclass); older
+    # versions return a bare tensor. Normalize to the input_ids tensor.
+    ids = out if isinstance(out, torch.Tensor) else out["input_ids"]
     return ids.to(model.device)
 
 
