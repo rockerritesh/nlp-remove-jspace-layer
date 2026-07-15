@@ -18,12 +18,12 @@ import requests
 DEFAULT_API = os.getenv("ABLATION_API", "http://localhost:8000")
 
 
-def call(api, prompt, layer, max_new_tokens, temperature, system_prompt):
+def call(api, prompt, layers, max_new_tokens, temperature, system_prompt):
     r = requests.post(
         api.rstrip("/") + "/generate",
         json={
             "prompt": prompt,
-            "layer": layer,
+            "layers": list(layers),
             "max_new_tokens": max_new_tokens,
             "temperature": temperature,
             "system_prompt": system_prompt,
@@ -36,7 +36,7 @@ def call(api, prompt, layer, max_new_tokens, temperature, system_prompt):
 
 def print_single(d):
     m = d["metrics"]
-    print(f"\n=== layer {d['layer']} ({d['plot_label']}) removed ===")
+    print(f"\n=== layers {d['layers']} ({d['plot_labels']}) removed ===")
     print(f"KL={m['kl_mean']}  top1_agreement={m['top1_agreement'] * 100:.1f}%  "
           f"n={m['n_positions']}  "
           f"(base {d['timing']['baseline_s']}s / abl {d['timing']['ablated_s']}s)\n")
@@ -51,7 +51,7 @@ def sweep(api, prompt, lo, hi, max_new_tokens, temperature, system_prompt):
 
     layers, kls, agrees = [], [], []
     for layer in range(lo, hi + 1):
-        d = call(api, prompt, layer, max_new_tokens, temperature, system_prompt)
+        d = call(api, prompt, [layer], max_new_tokens, temperature, system_prompt)
         m = d["metrics"]
         layers.append(layer)
         kls.append(m["kl_mean"])
@@ -87,19 +87,22 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("prompt")
     ap.add_argument("--api", default=DEFAULT_API)
-    ap.add_argument("--layer", type=int, default=14, help="decoder layer 0..31 (plot L = layer+1)")
+    ap.add_argument("--layer", type=int, default=14, help="single decoder layer 0..31 (plot L = layer+1)")
+    ap.add_argument("--layers", type=int, nargs="+", metavar="L",
+                    help="remove multiple decoder layers at once, e.g. --layers 5 10 14")
     ap.add_argument("--max-new-tokens", type=int, default=256)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--system-prompt", default="You are a helpful assistant.")
     ap.add_argument("--sweep", nargs=2, type=int, metavar=("LO", "HI"),
-                    help="sweep layers LO..HI and plot the effect curve")
+                    help="sweep single layers LO..HI and plot the effect curve")
     args = ap.parse_args()
 
     if args.sweep:
         sweep(args.api, args.prompt, args.sweep[0], args.sweep[1],
               args.max_new_tokens, args.temperature, args.system_prompt)
     else:
-        d = call(args.api, args.prompt, args.layer, args.max_new_tokens,
+        layers = args.layers if args.layers else [args.layer]
+        d = call(args.api, args.prompt, layers, args.max_new_tokens,
                  args.temperature, args.system_prompt)
         print_single(d)
 

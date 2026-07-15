@@ -62,20 +62,27 @@ class AblatedDecoderLayer(nn.Module):
 
 
 @contextmanager
-def ablate(mdl, layer_idx):
-    """Temporarily ablate decoder layer `layer_idx`. `None` = baseline (no-op)."""
-    if layer_idx is None:
+def ablate(mdl, layer_idxs):
+    """Temporarily ablate one or more decoder layers. `None`/empty = baseline.
+    Accepts a single int or an iterable of ints; duplicates are ignored."""
+    if layer_idxs is None:
         yield
         return
+    if isinstance(layer_idxs, int):
+        layer_idxs = [layer_idxs]
     layers = mdl.model.layers
-    if not (0 <= layer_idx < len(layers)):
-        raise ValueError(f"layer {layer_idx} out of range 0..{len(layers) - 1}")
-    orig = layers[layer_idx]
-    layers[layer_idx] = AblatedDecoderLayer(orig)
+    saved = {}
     try:
+        for idx in layer_idxs:
+            if not (0 <= idx < len(layers)):
+                raise ValueError(f"layer {idx} out of range 0..{len(layers) - 1}")
+            if idx not in saved:
+                saved[idx] = layers[idx]
+                layers[idx] = AblatedDecoderLayer(saved[idx])
         yield
     finally:
-        layers[layer_idx] = orig
+        for idx, orig in saved.items():
+            layers[idx] = orig
 
 
 # --------------------------------------------------------------------------- #
@@ -137,9 +144,9 @@ def build_inputs(system_prompt: str, prompt: str):
 
 
 @torch.no_grad()
-def run_generate(input_ids, max_new_tokens: int, temperature: float, layer_idx):
+def run_generate(input_ids, max_new_tokens: int, temperature: float, layer_idxs):
     do_sample = bool(temperature and temperature > 0)
-    with ablate(model, layer_idx):
+    with ablate(model, layer_idxs):
         out = model.generate(
             input_ids=input_ids,
             max_new_tokens=max_new_tokens,
@@ -155,7 +162,7 @@ def run_generate(input_ids, max_new_tokens: int, temperature: float, layer_idx):
 
 
 @torch.no_grad()
-def compare_metrics(full_ids, prompt_len: int, layer_idx: int):
+def compare_metrics(full_ids, prompt_len: int, layer_idxs):
     """Teacher-forced comparison over the baseline continuation: same context for
     both models, so differences are purely the ablation's effect."""
 
@@ -164,7 +171,7 @@ def compare_metrics(full_ids, prompt_len: int, layer_idx: int):
             return model(full_ids, use_cache=False).logits[0].float()  # [seq, vocab]
 
     base = logits_for(None)
-    abl = logits_for(layer_idx)
+    abl = logits_for(layer_idxs)
 
     # Positions prompt_len-1 .. seq-2 predict the continuation tokens.
     sl = slice(prompt_len - 1, full_ids.shape[1] - 1)
@@ -199,7 +206,8 @@ def serve(host: str, port: int):
 
     class GenRequest(BaseModel):
         prompt: str
-        layer: int = 14
+        layers: list[int] | None = None   # decoder layers to remove (0..31)
+        layer: int = 14                   # single-layer fallback (back-compat)
         max_new_tokens: int = 256
         temperature: float = 0.0
         system_prompt: str = "You are a helpful assistant."
@@ -221,20 +229,21 @@ def serve(host: str, port: int):
     def generate_endpoint(req: GenRequest):
         input_ids = build_inputs(req.system_prompt, req.prompt)
         prompt_len = input_ids.shape[1]
+        layer_idxs = sorted(set(req.layers)) if req.layers is not None else [req.layer]
 
         t0 = time.time()
         base_text, base_full = run_generate(input_ids, req.max_new_tokens, req.temperature, None)
         t1 = time.time()
-        abl_text, _ = run_generate(input_ids, req.max_new_tokens, req.temperature, req.layer)
+        abl_text, _ = run_generate(input_ids, req.max_new_tokens, req.temperature, layer_idxs)
         t2 = time.time()
-        metrics = compare_metrics(base_full, prompt_len, req.layer)
+        metrics = compare_metrics(base_full, prompt_len, layer_idxs)
         t3 = time.time()
 
         return {
             "baseline": base_text,
             "ablated": abl_text,
-            "layer": req.layer,
-            "plot_label": f"L{req.layer + 1}",
+            "layers": layer_idxs,
+            "plot_labels": ", ".join(f"L{i + 1}" for i in layer_idxs) if layer_idxs else "(none)",
             "metrics": metrics,
             "timing": {
                 "baseline_s": round(t1 - t0, 2),
@@ -265,22 +274,33 @@ def self_test():
     assert torch.allclose(wrapped[0], x), "ablated layer must return input unchanged"
     assert wrapped[1] == "attn_weights", "must preserve trailing tuple elements"
 
-    layers = nn.ModuleList([DummyLayer(), DummyLayer(), DummyLayer()])
+    layers = nn.ModuleList([DummyLayer() for _ in range(4)])
     fake = type("M", (), {})()
     fake.model = type("M", (), {})()
     fake.model.layers = layers
-    with ablate(fake, 1):
+
+    # Single layer (int or list) wraps only that one and restores after.
+    with ablate(fake, [1]):
         assert isinstance(layers[1], AblatedDecoderLayer), "should be wrapped inside"
         assert isinstance(layers[0], DummyLayer), "other layers untouched"
     assert isinstance(layers[1], DummyLayer), "layer must be restored after context"
 
-    # Out-of-range guard.
+    # Multiple layers at once.
+    with ablate(fake, [0, 2, 3]):
+        assert isinstance(layers[0], AblatedDecoderLayer)
+        assert isinstance(layers[2], AblatedDecoderLayer)
+        assert isinstance(layers[3], AblatedDecoderLayer)
+        assert isinstance(layers[1], DummyLayer), "unlisted layer untouched"
+    assert all(isinstance(l, DummyLayer) for l in layers), "all restored after context"
+
+    # Out-of-range guard restores any already-wrapped layers.
     try:
-        with ablate(fake, 99):
+        with ablate(fake, [0, 99]):
             pass
         raise AssertionError("expected ValueError for out-of-range layer")
     except ValueError:
         pass
+    assert all(isinstance(l, DummyLayer) for l in layers), "must restore on error"
 
     print("self-test passed ✓")
 

@@ -43,6 +43,24 @@
   }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
   .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .presets { display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 8px; }
+  .preset {
+    background: var(--panel2); color: var(--muted); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .preset:hover { color: var(--text); border-color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    min-width: 30px; height: 27px; padding: 0 2px; display: flex; align-items: center;
+    justify-content: center; background: var(--panel2); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 6px; font-size: 11px; cursor: pointer;
+    user-select: none; border-bottom-width: 3px;
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); }
+  .chip.early   { border-bottom-color: #4ec9b0; }
+  .chip.concept { border-bottom-color: var(--abl); }
+  .chip.late    { border-bottom-color: var(--accent); }
+  .chip.sel { background: var(--abl); color: #1a1205; border-color: var(--abl); font-weight: 700; }
   .metrics {
     display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0;
   }
@@ -97,10 +115,17 @@
       <label for="system">System prompt</label>
       <input id="system" value="You are a helpful assistant." />
     </div>
-    <div>
-      <label for="layer">Ablate decoder layer</label>
-      <select id="layer"></select>
-      <div class="hint" id="layerHint">decoder[14] → plot L15</div>
+    <div class="full">
+      <label>Remove decoder layers <span id="selCount" style="color:var(--abl);font-weight:600"></span> — click to toggle (0–31); bottom bar = t-SNE regime</label>
+      <div class="presets">
+        <button type="button" class="preset" data-preset="l15">Just L15</button>
+        <button type="button" class="preset" data-preset="concept">Concept L6–L17</button>
+        <button type="button" class="preset" data-preset="early">Early 0–4</button>
+        <button type="button" class="preset" data-preset="late">Late 28–31</button>
+        <button type="button" class="preset" data-preset="clear">Clear</button>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="hint" id="selHint"></div>
     </div>
     <div>
       <label for="maxTokens">Max new tokens</label>
@@ -135,32 +160,60 @@
       <div class="body" id="outBase">—</div>
     </div>
     <div class="panel abl">
-      <h2><span class="dot"></span> Ablated <span id="ablLabel" style="color:var(--muted);font-weight:400">(layer 14 removed)</span></h2>
+      <h2><span class="dot"></span> Ablated <span id="ablLabel" style="color:var(--muted);font-weight:400">(1 removed)</span></h2>
       <div class="body" id="outAbl">—</div>
     </div>
   </div>
 </div>
 
 <script>
-  // Populate the layer dropdown (0..31). Plot label Lk = decoder[k-1], so
-  // decoder index i -> plot L(i+1).
-  const layerSel = document.getElementById("layer");
-  for (let i = 0; i < 32; i++) {
-    const opt = document.createElement("option");
-    opt.value = i;
-    opt.textContent = `decoder[${i}]  (plot L${i + 1})`;
-    if (i === 14) opt.selected = true;
-    layerSel.appendChild(opt);
-  }
-
   const $ = (id) => document.getElementById(id);
-  const updateHint = () => {
-    const i = +layerSel.value;
-    $("layerHint").textContent = `decoder[${i}] → plot L${i + 1}`;
-    $("ablLabel").textContent = `(layer ${i} removed)`;
-  };
-  layerSel.addEventListener("change", updateHint);
-  updateHint();
+
+  // Multi-layer selection: a 0..31 toggle grid, colour-coded by t-SNE regime.
+  // Concept-forming band = decoder 5..16 (t-SNE plots L6..L17).
+  const N_LAYERS = 32;
+  const selected = new Set([14]);            // default: decoder 14 = plot L15
+  const regime = (i) => (i <= 4 ? "early" : i <= 16 ? "concept" : "late");
+  const chipsEl = $("chips");
+
+  function renderChips() {
+    chipsEl.innerHTML = "";
+    for (let i = 0; i < N_LAYERS; i++) {
+      const c = document.createElement("div");
+      c.className = "chip " + regime(i) + (selected.has(i) ? " sel" : "");
+      c.textContent = i;
+      c.title = `decoder ${i} → plot L${i + 1}`;
+      c.addEventListener("click", () => {
+        selected.has(i) ? selected.delete(i) : selected.add(i);
+        renderChips();
+        updateSel();
+      });
+      chipsEl.appendChild(c);
+    }
+  }
+  const selectedSorted = () => [...selected].sort((a, b) => a - b);
+  function updateSel() {
+    const arr = selectedSorted();
+    $("selCount").textContent = arr.length ? `— ${arr.length} selected` : "— none";
+    $("selHint").textContent = arr.length
+      ? `removing decoder ${arr.join(", ")}   ·   t-SNE ${arr.map((i) => "L" + (i + 1)).join(", ")}`
+      : "no layers selected → ablated output = baseline";
+    $("ablLabel").textContent = arr.length ? `(${arr.length} removed)` : "(baseline)";
+  }
+  document.querySelectorAll(".preset").forEach((b) =>
+    b.addEventListener("click", () => {
+      const p = b.dataset.preset;
+      if (p === "clear") selected.clear();
+      else if (p === "l15") { selected.clear(); selected.add(14); }
+      else if (p === "concept") { for (let i = 5; i <= 16; i++) selected.add(i); }
+      else if (p === "early") { for (let i = 0; i <= 4; i++) selected.add(i); }
+      else if (p === "late") { for (let i = 28; i <= 31; i++) selected.add(i); }
+      renderChips();
+      updateSel();
+    })
+  );
+  renderChips();
+  updateSel();
 
   function setStatus(msg, cls = "") {
     const s = $("status");
@@ -173,7 +226,7 @@
     const body = {
       prompt: $("prompt").value,
       system_prompt: $("system").value,
-      layer: +layerSel.value,
+      layers: selectedSorted(),
       max_new_tokens: +$("maxTokens").value,
       temperature: +$("temp").value,
     };
@@ -194,14 +247,17 @@
 
       $("outBase").textContent = d.baseline || "(empty)";
       $("outAbl").textContent = d.ablated || "(empty)";
-      $("ablLabel").textContent = `(layer ${d.layer} = ${d.plot_label} removed)`;
+      const n = (d.layers || []).length;
+      $("ablLabel").textContent = n
+        ? `(${n} removed: ${d.plot_labels})`
+        : "(baseline)";
 
       $("mKl").textContent = d.metrics.kl_mean;
       $("mTop1").textContent = (d.metrics.top1_agreement * 100).toFixed(1) + "%";
       $("mPos").textContent = d.metrics.n_positions;
       $("mTime").textContent = `${d.timing.baseline_s}s / ${d.timing.ablated_s}s`;
       $("metrics").style.display = "flex";
-      setStatus("Done. Higher KL / lower agreement = this layer mattered more.", "ok");
+      setStatus("Done. Higher KL / lower agreement = the removed layers mattered more.", "ok");
     } catch (e) {
       setStatus("Error: " + e.message + " — is the SSH tunnel up and the server running?", "err");
       $("outBase").textContent = "—";
