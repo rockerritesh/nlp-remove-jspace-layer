@@ -1,0 +1,10 @@
+# VM-side dependencies (reference only — the embedding-project VM already has these).
+# Install only if provisioning a fresh VM:  pip install -r requirements-vm.txt
+torch
+transformers>=4.44
+accelerate
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic>=2
+bitsandbytes   # optional: only needed for `python server.py --load-4bit`

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Llama Layer Ablation — Baseline vs Ablated</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a21; --panel2: #1e222b; --border: #2a2f3a;
+    --text: #e6e9ef; --muted: #9aa4b2; --accent: #6ea8fe; --base: #4ec9b0;
+    --abl: #f0a35e; --danger: #f06e6e; --ok: #6ecf8e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .controls {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; margin-bottom: 16px;
+  }
+  .controls .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  input, textarea, select {
+    width: 100%; background: var(--panel2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px;
+    font: inherit; resize: vertical;
+  }
+  textarea { min-height: 70px; }
+  input:focus, textarea:focus, select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+  .row { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+  button {
+    background: var(--accent); color: #0b1020; border: none; border-radius: 8px;
+    padding: 10px 20px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .metrics {
+    display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0;
+  }
+  .metric {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; min-width: 130px;
+  }
+  .metric .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .metric .v { font-size: 20px; font-weight: 600; margin-top: 2px; }
+  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 780px) { .panels { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .panel h2 {
+    margin: 0; padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .panel.base h2 .dot { background: var(--base); }
+  .panel.abl h2 .dot { background: var(--abl); }
+  .panel .body {
+    padding: 14px; white-space: pre-wrap; word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
+    min-height: 120px;
+  }
+  .status { color: var(--muted); font-size: 12px; margin: 10px 0; min-height: 18px; }
+  .status.err { color: var(--danger); }
+  .status.ok { color: var(--ok); }
+  .spinner {
+    display: inline-block; width: 12px; height: 12px; border: 2px solid var(--muted);
+    border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite;
+    vertical-align: -1px; margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧠 Llama Layer Ablation</h1>
+  <span class="sub">Remove one decoder layer &amp; compare generation · Llama-3.1-8B-Instruct</span>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="full">
+      <label for="prompt">Your prompt</label>
+      <textarea id="prompt" placeholder="Ask the assistant anything…">Explain why the sky is blue in two sentences.</textarea>
+    </div>
+    <div class="full">
+      <label for="system">System prompt</label>
+      <input id="system" value="You are a helpful assistant." />
+    </div>
+    <div>
+      <label for="layer">Ablate decoder layer</label>
+      <select id="layer"></select>
+      <div class="hint" id="layerHint">decoder[14] → plot L15</div>
+    </div>
+    <div>
+      <label for="maxTokens">Max new tokens</label>
+      <input id="maxTokens" type="number" value="256" min="1" max="2048" />
+    </div>
+    <div>
+      <label for="temp">Temperature</label>
+      <input id="temp" type="number" value="0" min="0" max="2" step="0.1" />
+      <div class="hint">0 = greedy (reproducible)</div>
+    </div>
+    <div>
+      <label for="api">API base URL</label>
+      <input id="api" value="http://localhost:8000" />
+      <div class="hint">SSH-tunneled from the VM</div>
+    </div>
+    <div class="full row">
+      <button id="go">Generate &amp; compare</button>
+      <span class="status" id="status"></span>
+    </div>
+  </div>
+
+  <div class="metrics" id="metrics" style="display:none">
+    <div class="metric"><div class="k">KL divergence</div><div class="v" id="mKl">—</div></div>
+    <div class="metric"><div class="k">Top-1 agreement</div><div class="v" id="mTop1">—</div></div>
+    <div class="metric"><div class="k">Positions</div><div class="v" id="mPos">—</div></div>
+    <div class="metric"><div class="k">Time (base / abl)</div><div class="v" id="mTime">—</div></div>
+  </div>
+
+  <div class="panels">
+    <div class="panel base">
+      <h2><span class="dot"></span> Baseline <span style="color:var(--muted);font-weight:400">(full model)</span></h2>
+      <div class="body" id="outBase">—</div>
+    </div>
+    <div class="panel abl">
+      <h2><span class="dot"></span> Ablated <span id="ablLabel" style="color:var(--muted);font-weight:400">(layer 14 removed)</span></h2>
+      <div class="body" id="outAbl">—</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Populate the layer dropdown (0..31). Plot label Lk = decoder[k-1], so
+  // decoder index i -> plot L(i+1).
+  const layerSel = document.getElementById("layer");
+  for (let i = 0; i < 32; i++) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = `decoder[${i}]  (plot L${i + 1})`;
+    if (i === 14) opt.selected = true;
+    layerSel.appendChild(opt);
+  }
+
+  const $ = (id) => document.getElementById(id);
+  const updateHint = () => {
+    const i = +layerSel.value;
+    $("layerHint").textContent = `decoder[${i}] → plot L${i + 1}`;
+    $("ablLabel").textContent = `(layer ${i} removed)`;
+  };
+  layerSel.addEventListener("change", updateHint);
+  updateHint();
+
+  function setStatus(msg, cls = "") {
+    const s = $("status");
+    s.className = "status " + cls;
+    s.innerHTML = msg;
+  }
+
+  async function generate() {
+    const api = $("api").value.replace(/\/+$/, "");
+    const body = {
+      prompt: $("prompt").value,
+      system_prompt: $("system").value,
+      layer: +layerSel.value,
+      max_new_tokens: +$("maxTokens").value,
+      temperature: +$("temp").value,
+    };
+    $("go").disabled = true;
+    setStatus('<span class="spinner"></span>Running baseline + ablated generation on the VM…');
+    $("outBase").textContent = "…";
+    $("outAbl").textContent = "…";
+    $("metrics").style.display = "none";
+
+    try {
+      const res = await fetch(api + "/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+      const d = await res.json();
+
+      $("outBase").textContent = d.baseline || "(empty)";
+      $("outAbl").textContent = d.ablated || "(empty)";
+      $("ablLabel").textContent = `(layer ${d.layer} = ${d.plot_label} removed)`;
+
+      $("mKl").textContent = d.metrics.kl_mean;
+      $("mTop1").textContent = (d.metrics.top1_agreement * 100).toFixed(1) + "%";
+      $("mPos").textContent = d.metrics.n_positions;
+      $("mTime").textContent = `${d.timing.baseline_s}s / ${d.timing.ablated_s}s`;
+      $("metrics").style.display = "flex";
+      setStatus("Done. Higher KL / lower agreement = this layer mattered more.", "ok");
+    } catch (e) {
+      setStatus("Error: " + e.message + " — is the SSH tunnel up and the server running?", "err");
+      $("outBase").textContent = "—";
+      $("outAbl").textContent = "—";
+    } finally {
+      $("go").disabled = false;
+    }
+  }
+
+  $("go").addEventListener("click", generate);
+  $("prompt").addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") generate();
+  });
+</script>
+</body>
+</html>

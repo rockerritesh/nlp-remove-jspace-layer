@@ -1,0 +1,14 @@
+[project]
+name = "nlp-remove-jspace-layer"
+version = "0.1.0"
+description = "Mac-side client for the Llama-3.1-8B layer-ablation experiment (UI + plotting)."
+requires-python = ">=3.10"
+# Mac side only: the UI (ui.html) needs nothing; these power client.py.
+# The heavy model deps (torch/transformers/...) live on the VM, not here.
+dependencies = [
+    "requests>=2.31",
+    "matplotlib>=3.7",
+]
+
+[tool.uv]
+package = false

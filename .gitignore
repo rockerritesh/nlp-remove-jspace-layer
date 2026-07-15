@@ -1,0 +1,8 @@
+.env
+Conversation.md
+__pycache__/
+*.pyc
+results/
+.venv/
+uv.lock
+.DS_Store
