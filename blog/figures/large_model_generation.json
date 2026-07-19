@@ -1,0 +1,31 @@
+{
+  "model": "meta-llama/Meta-Llama-3.1-70B",
+  "layers": 80,
+  "band": [
+    20,
+    59
+  ],
+  "max_new_tokens": 40,
+  "results": [
+    {
+      "prompt": "The theory of relativity states that",
+      "baseline": "The theory of relativity states that the speed of light is a constant for all observers, regardless of their relative speeds. This means that if you were traveling at a speed close to the speed of light, you would still measure the speed",
+      "ablated": "The theory of relativity states that the universe is made up of space and time. The universe is a vast expanse of space and time. The universe is made up of matter and energy. The universe is made up of stars,"
+    },
+    {
+      "prompt": "The capital of France is",
+      "baseline": "The capital of France is Paris.\nThe capital of Italy is Rome.\nThe capital of Germany is Berlin.\nThe capital of England is London.\nThe capital of Spain is Madrid.\nThe capital of the United States is Washington D.C",
+      "ablated": "The capital of France is a city of light, love, and luxury. With an abundance of world-class museums, galleries, restaurants, and shops, it\u2019s no surprise that Paris is one of the most popular tourist destinations in"
+    },
+    {
+      "prompt": "Step by step, to bake bread you first",
+      "baseline": "Step by step, to bake bread you first need to make a dough. The dough is made up of flour, water, yeast, and salt. You mix these ingredients together until you have a smooth, elastic dough. Once you have your dough",
+      "ablated": "Step by step, to bake bread you first\nA. mix the ingredients.\nB. bake the dough.\nC. knead the dough.\nD. all of the above.\nAnswer: A"
+    },
+    {
+      "prompt": "Once upon a time, in a distant kingdom,",
+      "baseline": "Once upon a time, in a distant kingdom, there lived a brave and noble princess named Elena. Elena was known throughout the land for her unwavering courage and her deep love for her people. She was the embodiment of strength and resilience, and",
+      "ablated": "Once upon a time, in a distant kingdom, we all lived happily ever after. But what if the story was a lie? What if we were the villains? And what if we were the ones who needed saving? In this dark and twisted fair"
+    }
+  ]
+}

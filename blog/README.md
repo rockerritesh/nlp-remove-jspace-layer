@@ -232,6 +232,27 @@ interventions must **rebind** the output (`layer.output = ...`) rather than writ
 
 ---
 
+## 6d. Experiment 7 — seeing it on a *large* model (70B via NDIF): scale = redundancy
+
+The T4 experiments read out real generated text, but only for 8B. Does removing the middle
+band garble a much bigger model the same way? With nnsight `remote=True` we can **generate**
+from the full **Llama-3.1-70B** (base) on NDIF — no local GPU — with a middle band made
+identity at every step. Full transcripts: [`large_model_generation.md`](figures/large_model_generation.md).
+
+**Prompt: "The theory of relativity states that…"**
+- *baseline:* "…the speed of light is a constant for all observers…"
+- *remove 25% (20/80 layers):* **still correct** — "…time passes at different rates… the faster you move, the slower time passes"
+- *remove 50% (40/80 layers):* **degrades** — "The universe is made up of space and time. The universe is a vast expanse of space and time. The universe is made up of matter and energy…" (fluent but repetitive, physics gone)
+
+**The scale effect.** 8B collapsed when we removed ~37% of its layers (Exp 4/5); 70B is
+**untouched at 25%** and only *starts* to wobble at **50%** — and even then it stays
+grammatical, drifting to filler rather than breaking. Bigger models carry far more redundant
+middle layers, so the workspace is more distributed and harder to knock out — consistent with
+depth-pruning results [6, 7]. (Base model, greedy, 4 prompts, band centered at the middle —
+directional.)
+
+---
+
 ## 7. The connection: a blunt version of the "global workspace"
 
 Anthropic's **"Verbalizable Representations Form a Global Workspace in Language Models"**
