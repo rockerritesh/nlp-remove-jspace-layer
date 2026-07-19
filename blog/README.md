@@ -203,6 +203,35 @@ continuation — a proxy for "output preserved," not a correctness grade.
 
 ---
 
+## 6c. Experiment 6 — full-precision replication via nnsight + NDIF (no local GPU)
+
+Everything above ran **4-bit** on a T4, on the **Instruct** model, with a continuation
+metric. Are the findings artifacts of any of those? We re-ran the ablation on
+**full-precision `Meta-Llama-3.1-8B` (base)** using [nnsight](https://nnsight.net) with
+`remote=True`, so the model executes on **NDIF's servers** — the laptop only orchestrates
+(no local GPU, no VM). Ablation here is a one-liner: a layer's input *is* the previous
+layer's output, so `layers[L].output = layers[L-1].output` makes it identity.
+
+![Remote full-precision single-layer sweep](figures/remote_sweep.png)
+
+The **early cliff reproduces exactly**: removing `L0`/`L1` → top-1 **0%**; every layer
+`L2–L29` → top-1 83–100% (KL ≈ 0.03–0.28); a bump at the last layers. Overlaid on our local
+4-bit Instruct curve (grey), the two track closely despite different **precision** (4-bit vs
+fp16), **variant** (Instruct vs base), **backend** (local T4 vs NDIF), and **metric**
+(continuation vs next-token). And the band collapse repeats:
+
+![Remote full-precision cumulative removal](figures/remote_cumulative.png)
+
+So the "two load-bearing early layers + robust-but-collectively-essential middle" picture is
+**not** a quantization or instruction-tuning artifact — it's a property of the architecture.
+
+*Practical notes for anyone reproducing:* nnsight 0.7 needs `transformers>=4.48,<5`; remote
+interventions must **rebind** the output (`layer.output = ...`) rather than write in-place
+(`[:]=`, which isn't captured); and the free NDIF tier only runs **pinned** models (the base
+8B/70B/405B), not arbitrary checkpoints — hence base, not Instruct.
+
+---
+
 ## 7. The connection: a blunt version of the "global workspace"
 
 Anthropic's **"Verbalizable Representations Form a Global Workspace in Language Models"**
@@ -245,6 +274,9 @@ python server.py --load-4bit                 # FastAPI on :8000
 python experiments/run_experiments.py        # UMAP grid, separability, ablation (8-prompt)
 python experiments/run_queries100.py         # 100-query sweep + per-category + CSV/JSON
 
+# Full-precision replication on NDIF (no local GPU) — needs NDIF_API_KEY in .env:
+python experiments/nnsight_remote_sweep.py    # remote_sweep.png, remote_cumulative.png
+
 # From your laptop: tunnel + open ui.html, ablate any set of layers interactively
 gcloud compute ssh <vm> -- -N -L 8000:localhost:8000
 #   ui.html → 0–31 toggle grid (presets: Concept L6–L17, Early, Late) → Generate & compare
@@ -264,6 +296,7 @@ python client.py "Explain why the sky is blue." --sweep 0 31   # CLI layer sweep
 8. McInnes, Healy, Melville (2018). *UMAP.* arXiv:1802.03426. / van der Maaten & Hinton (2008). *t-SNE.* JMLR.
 9. Baars (1988); Dehaene et al. — *Global Workspace Theory* of consciousness (the analogy).
 10. Gurnee, Sofroniew, Pearce, … Lindsey (2026). **Verbalizable Representations Form a Global Workspace in Language Models.** Anthropic. https://transformer-circuits.pub/2026/workspace/index.html
+11. Fiotto-Kaufman et al. (2024). *NNsight and NDIF: Democratizing Access to Foundation Model Internals.* arXiv:2407.14561. https://nnsight.net
 
 ---
 

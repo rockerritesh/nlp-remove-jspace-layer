@@ -8,6 +8,11 @@ requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31",
     "matplotlib>=3.7",
+    # nnsight remote experiments (experiments/nnsight_*.py). nnsight 0.7 needs
+    # transformers in [4.48, 5.0); NDIF free tier runs the pinned base Llama-3.1.
+    "nnsight>=0.7",
+    "python-dotenv>=1.0",
+    "transformers>=4.48,<5",
 ]
 
 [tool.uv]
