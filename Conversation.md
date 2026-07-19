@@ -75,3 +75,36 @@ few prompts; then explore which middle layer's removal changes generation most.
 - **Status: all deliverables complete and committed** (latest `9d9598b`). Untracked/local:
   `blog/layer-ablation-blog.pdf` (build artifact), `Conversation.md` (now un-ignored),
   `.claude/`, `results/manual/`.
+
+## 2026-07-16 — Private repo, nnsight/NDIF remote, larger models (405B), comparative figure
+
+- **Private GitHub repo:** pushed everything to `github.com/rockerritesh/nlp-remove-jspace-layer`
+  (PRIVATE, personal `nl-mode`/rockerritesh). `.env` never tracked (keys safe). Latest `c890ff9`.
+- **nnsight + NDIF remote (Experiment 6):** re-ran the ablation on FULL-PRECISION base
+  `Meta-Llama-3.1-8B` via `remote=True` (model on NDIF servers, laptop only orchestrates — no
+  local GPU/VM). Reproduces the early cliff + band collapse → findings aren't a 4-bit/Instruct
+  artifact. Local uv `.venv` (py3.12) with nnsight 0.7.
+- **Tooling gotchas (durable):** nnsight 0.7 needs `transformers` in **[4.48, 5.0)** (5.x →
+  MissedProviderError; use 4.57). Llama layer `.output` is a **tensor** (not tuple) here.
+  `.input`/`.inputs` fail remotely — ablate by **rebind**: `layers[L].output = layers[L-1].output`
+  (embeddings for L0). In-place `[:]=` is NOT captured remotely — must rebind. nnsight traces
+  **parse block source**, so run from a real `.py` file (heredoc/`-c` → "could not get source").
+  Generation interventions sit directly inside `with model.generate(...)` and apply to all
+  tokens; read output via `model.generator.output.save()`. NDIF **free tier runs only PINNED
+  base models** (8B/70B/405B), not Instruct.
+- **Large-model generation (Experiment 7):** real text from **70B** with a middle band removed.
+  70B is robust — 25% removal still correct/coherent; only ~50% starts to wobble (fluent).
+- **Cross-model gallery (§6e, Experiment 8):** same relativity prompt through 8B/70B/405B at
+  0/25/50%. All stay fluent even at 50% (artifacts/drift, not gibberish). Reconciled: the
+  dramatic §6 collapse was Instruct + concept band; KL/top-1 measure divergence from the
+  original distribution, not loss of fluency.
+- **Comparative scale figure (§6f):** `scale_compare.png` — next-token top-1 & KL vs %-removed,
+  one curve per model. HONEST finding: on the strict next-token metric all sizes collapse by
+  ~30-40% removal; larger models only hold modestly better at ≤20%, and 405B diverges MOST at
+  40-50%. Free-generation fluency (gallery) is far more forgiving than this metric implies.
+- **Blog now spans 8 experiments**; PDF recompiled (2.32 MB, all figures embedded) and sent to
+  Telegram twice (msg 1319, 1323) via the control-claude-with-telegram bot. Everything pushed;
+  working tree clean.
+- Scripts added: `experiments/nnsight_verify.py`, `nnsight_remote_smoke.py`,
+  `nnsight_remote_sweep.py`, `nnsight_remote_generate.py`, `nnsight_gallery.py`,
+  `nnsight_scale_compare.py`. Reusable: `nnsight_remote_generate.py <model> <max_tokens> <band_frac>`.
