@@ -1,0 +1,77 @@
+{
+  "8B": {
+    "model": "meta-llama/Meta-Llama-3.1-8B",
+    "layers": 32,
+    "prompt": "The theory of relativity states that",
+    "outputs": {
+      "0.0": {
+        "pct": 0,
+        "removed": 0,
+        "band": "-",
+        "text": "The theory of relativity states that the laws of physics are the same for all observers that are moving at a constant speed. This means that if you are moving at a constant speed, you will not be able to tell the difference between"
+      },
+      "0.25": {
+        "pct": 25,
+        "removed": 8,
+        "band": "12-19",
+        "text": "The theory of relativity states that we are living in a four-dimensional universe. It\u2019s made of three spatial dimensions and one time dimension. The time dimension is the fourth dimension. Einstein\u2019s theory of relativity says that time is a"
+      },
+      "0.5": {
+        "pct": 50,
+        "removed": 16,
+        "band": "8-23",
+        "text": "The theory of relativity states that a person who is in a state of rest, and one who is in a state of motion, will both have the same experience. This is because time slows down for the person who is in motion"
+      }
+    }
+  },
+  "70B": {
+    "model": "meta-llama/Meta-Llama-3.1-70B",
+    "layers": 80,
+    "prompt": "The theory of relativity states that",
+    "outputs": {
+      "0.0": {
+        "pct": 0,
+        "removed": 0,
+        "band": "-",
+        "text": "The theory of relativity states that the speed of light in a vacuum is constant and that it always propagates at the same speed, which is 299,792 kilometres per second in a vacuum.\nThe theory of relativity states that"
+      },
+      "0.25": {
+        "pct": 25,
+        "removed": 20,
+        "band": "30-49",
+        "text": "The theory of relativity states that the speed of light is the same in all inertial reference frames, and that the speed of light is the same in all inertial reference frames.\nA. true\nB. false\nAnswer:"
+      },
+      "0.5": {
+        "pct": 50,
+        "removed": 40,
+        "band": "20-59",
+        "text": "The theory of relativity states that the speed of light is constant, regardless of the observer's frame of reference. In other words, light travels at the same speed no matter how fast you are moving. This is a fundamental principle of"
+      }
+    }
+  },
+  "405B": {
+    "model": "meta-llama/Meta-Llama-3.1-405B",
+    "layers": 126,
+    "prompt": "The theory of relativity states that",
+    "outputs": {
+      "0.0": {
+        "pct": 0,
+        "removed": 0,
+        "band": "-",
+        "text": "The theory of relativity states that all uniform motion is relative, and that there is no absolute and well-defined state of rest (no privileged reference frames)\nThe theory of relativity states that all uniform motion is relative, and that there"
+      },
+      "0.25": {
+        "pct": 25,
+        "removed": 31,
+        "band": "48-78",
+        "text": "The theory of relativity states that the space-time continuum is curved. This means that the universe is not a straight line, but a curve. The curve is caused by the force of gravity.\nThe theory of relativity also states that"
+      },
+      "0.5": {
+        "pct": 50,
+        "removed": 63,
+        "band": "32-94",
+        "text": "The theory of relativity states thatj\nA. a moving clock runs faster than a stationary clock.\nB. a moving clock runs slower than a stationary clock.\nC. a moving clock runs at the same speed as a stationary clock"
+      }
+    }
+  }
+}
