@@ -280,6 +280,33 @@ robust than the metrics alone suggest** — especially as the model gets larger.
 
 ---
 
+## 6f. Comparative figure — how much of the middle can each size lose?
+
+Removing a **centered middle band of increasing size** from all three base models (NDIF
+remote), measuring how far the **next-token** prediction moves from the intact model
+(top-1 agreement + KL, 8 prompts):
+
+![Scale comparison of middle-band removal](figures/scale_compare.png)
+
+Reading it honestly — the story is *not* a clean "bigger is strictly more robust":
+
+- **Low removal (≤20%):** larger models hold on better. At 20% removed, 8B's next-token
+  agreement has already halved (50%, KL 1.5) while **70B and 405B are still ~75% (KL ~0.45)** —
+  the first fifth of the middle is more disposable the bigger the model.
+- **Beyond ~30%:** all three **collapse** on this strict metric (agreement → chance). And at
+  40–50% the **405B distribution actually diverges *most*** (KL ~7–9.5).
+- **Reconcile with the gallery (§6e):** that last point seems to contradict "big models are
+  robust" — until you remember this is **teacher-forced next-token divergence**, not free
+  generation. The 405B's *predicted distribution* moves a lot, yet when left to **generate**
+  it still produced fluent, on-topic text at 50%. Distribution-shift ≠ incoherent output.
+
+So: the middle band is genuinely load-bearing for *matching the original model's predictions*
+(all sizes break by ~30–40%), while **free-generation fluency is far more forgiving** — and
+larger models buy you more headroom at the low-removal end. (8 prompts, base models, greedy;
+directional, not a benchmark.)
+
+---
+
 ## 7. The connection: a blunt version of the "global workspace"
 
 Anthropic's **"Verbalizable Representations Form a Global Workspace in Language Models"**
