@@ -4,3 +4,10 @@ __pycache__/
 .venv/
 uv.lock
 .DS_Store
+
+# Personal learning scratch (not part of the project deliverable)
+study/
+
+# NDIF client progress spinners make these huge (14 MB for one run) and they
+# hold no results — every finding is in generations.jsonl / metrics.csv.
+results/**/run.log

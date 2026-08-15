@@ -108,3 +108,65 @@ few prompts; then explore which middle layer's removal changes generation most.
 - Scripts added: `experiments/nnsight_verify.py`, `nnsight_remote_smoke.py`,
   `nnsight_remote_sweep.py`, `nnsight_remote_generate.py`, `nnsight_gallery.py`,
   `nnsight_scale_compare.py`. Reusable: `nnsight_remote_generate.py <model> <max_tokens> <band_frac>`.
+
+## 2026-08-14/15 — Experiment 9: long-form generation under a 1/2/3-layer cut (405B)
+
+**Question:** a 1–3 layer cut is <2.5% of a 126-layer model and is invisible on next-token
+metrics. Does it stay invisible over a LONG roll-out, or does the per-step perturbation
+compound? (Earlier smoke: at 128 tokens a 3-layer cut was byte-identical to baseline; at
+256 tokens the story diverged — so the effect only exists at length.)
+
+**Design:** `meta-llama/Meta-Llama-3.1-405B` (base, NDIF remote via nnsight), 126 layers.
+100 long-form prompts × 5 families (narrative 25 / code 20 / explain 20 / procedure 15 /
+reasoning 20), completion-style cues because NDIF pins base models. Conditions k = 0/1/2/3
+contiguous layers centred on L63. **Greedy** decoding so every difference is attributable to
+the ablation. 1024 tokens forced (see below) ≈ 830 words mean. 400 generations total.
+
+**HEADLINE FINDING — divergence without degradation.** The cut reroutes the trajectory
+but does not damage capability:
+- 94–98% of ablated runs diverge from baseline; median first difference at token **101 (k=1)
+  / 58 (k=2) / 53 (k=3)** — i.e. ~5–10% of the way in. They never reconverge: only ~0.60
+  unigram F1 with baseline over the remaining ~900 tokens. One layer of 126 rewrites most
+  of a 900-word answer.
+- More removal diverges earlier (178→144→124 mean tokens), significant only k1 vs k3
+  (paired permutation p=0.042).
+- **BUT no quality metric differs from baseline** (paired sign-flip permutation, n=100,
+  20k iters): distinct-3, looped-token share, TTR, mean sentence length, loop onset — all
+  p>0.05. Python parse validity 100/100/100/96.4% for k=0/1/2/3.
+- So divergence ≠ damage. KL/top-1 from the earlier experiments measure *departure from the
+  original distribution*, not loss of capability — this run separates the two directly.
+- Damage barely scales with k: k=1 and k=3 give nearly the same F1 (~0.60). Dominant effect
+  is *any* perturbation of the middle band, not its size.
+
+**Two methodology bugs caught on the first real batch (both would have produced wrong
+findings — the partial numbers reported before the fix were artifacts):**
+1. **Pad tokens scored as model output.** Batched generation left-pads every sequence to the
+   batch max with `128001`; one baseline row was 909 pads of 1024. Repetition metrics were
+   measuring pad runs ("baseline loops at token 302, 75% repeated" was ~all artifact).
+   Analysis now trims each sequence at its first EOS.
+2. **The prompts didn't produce long output on a BASE model.** Real tokens before EOS:
+   reasoning ~51, procedure ~200, explain ~385. Only narrative ran long. Fixed with
+   `min_new_tokens == max_new_tokens`, which blocks the EOS logit for the whole roll-out —
+   verified remotely (51 → full 200, zero EOS). Natural-length pilot kept as
+   `generations_naturallen_pilot.jsonl`.
+3. Minor: `prefix_frac` divided by the *ablated* length, so an early-stopping run that matched
+   the baseline scored "100% identical". Now divided by baseline length; early stop is its
+   own metric.
+
+**NDIF/tooling lessons (durable):**
+- **Batching is free.** Wall-clock scales with token count, NOT batch size (4 prompts @128tok
+  == 1 prompt @128tok == 33s). Batch of 10 @1024tok = ~305s. This turned a ~30h serial study
+  into ~3.4h. Length-sort prompts before batching to minimise left-padding.
+- `min_new_tokens` DOES pass through nnsight to the remote model.
+- **NDIF can wedge a job in RUNNING forever** — it never raises, so a plain retry loop blocks
+  indefinitely (observed one job stuck 6h against a 304s norm). Added a `SIGALRM` per-job
+  wall-clock budget. **Caveat: the alarm only rescues a CLEAN process** — after the first
+  alarm tore an exception out of nnsight's generate context, the in-process retry wedged again
+  and the alarm did NOT fire (blocked in a C-level wait that never yields to the handler).
+  Use `--retries 1` and re-run the script; resume by (prompt_id, k) makes that cheap.
+- Transient `socketio ConnectionError` bursts happen; a minimal probe confirms NDIF health.
+- Batch-outer / condition-inner loop order so partial results are analysable immediately.
+
+**Artifacts:** `experiments/{longform_prompts,nnsight_405b_longform,analyze_longform,
+plot_longform}.py`, `results/longform405b/{generations.jsonl,metrics.csv,summary.json}`,
+`blog/figures/longform_{metrics,onset,quality}.png`. run.log gitignored (14 MB of spinners).

@@ -1,0 +1,2440 @@
+{
+  "source": "/Users/sumityadav/Documents/research/nlp-remove-jspace-layer/results/longform405b/generations.jsonl",
+  "n_prompts": 100,
+  "conditions": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "overall": {
+    "0": {
+      "divergence_tok": {
+        "mean": 0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "prefix_frac": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "diverged": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "uni_f1": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "big_f1": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "distinct_1": {
+        "mean": 0.1909,
+        "median": 0.1865,
+        "sd": 0.066,
+        "n": 100
+      },
+      "distinct_2": {
+        "mean": 0.3697,
+        "median": 0.3636,
+        "sd": 0.1427,
+        "n": 100
+      },
+      "distinct_3": {
+        "mean": 0.446,
+        "median": 0.4291,
+        "sd": 0.1787,
+        "n": 100
+      },
+      "loop_onset": {
+        "mean": 532.09,
+        "median": 514.0,
+        "sd": 234.5852,
+        "n": 100
+      },
+      "looped_frac": {
+        "mean": 0.6842,
+        "median": 0.7451,
+        "sd": 0.2823,
+        "n": 100
+      },
+      "ttr": {
+        "mean": 0.2252,
+        "median": 0.2183,
+        "sd": 0.0907,
+        "n": 100
+      },
+      "mean_sent_len": {
+        "mean": 16.8696,
+        "median": 17.0486,
+        "sd": 5.4794,
+        "n": 100
+      },
+      "py_parse_frac": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 20
+      },
+      "n_words": {
+        "mean": 839.71,
+        "median": 879.5,
+        "sd": 101.8716,
+        "n": 100
+      },
+      "n_tokens": {
+        "mean": 1024,
+        "median": 1024.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "len_ratio": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "stopped_early": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      }
+    },
+    "1": {
+      "divergence_tok": {
+        "mean": 178.39,
+        "median": 101.0,
+        "sd": 242.8129,
+        "n": 100
+      },
+      "prefix_frac": {
+        "mean": 0.1742,
+        "median": 0.0986,
+        "sd": 0.2371,
+        "n": 100
+      },
+      "diverged": {
+        "mean": 0.94,
+        "median": 1.0,
+        "sd": 0.2387,
+        "n": 100
+      },
+      "uni_f1": {
+        "mean": 0.6286,
+        "median": 0.5957,
+        "sd": 0.1853,
+        "n": 100
+      },
+      "big_f1": {
+        "mean": 0.4477,
+        "median": 0.3832,
+        "sd": 0.2502,
+        "n": 100
+      },
+      "distinct_1": {
+        "mean": 0.1839,
+        "median": 0.1831,
+        "sd": 0.0533,
+        "n": 100
+      },
+      "distinct_2": {
+        "mean": 0.3576,
+        "median": 0.3539,
+        "sd": 0.1167,
+        "n": 100
+      },
+      "distinct_3": {
+        "mean": 0.4343,
+        "median": 0.4178,
+        "sd": 0.146,
+        "n": 100
+      },
+      "loop_onset": {
+        "mean": 499.73,
+        "median": 449.5,
+        "sd": 228.8326,
+        "n": 100
+      },
+      "looped_frac": {
+        "mean": 0.7017,
+        "median": 0.7339,
+        "sd": 0.2435,
+        "n": 100
+      },
+      "ttr": {
+        "mean": 0.2214,
+        "median": 0.2174,
+        "sd": 0.0822,
+        "n": 100
+      },
+      "mean_sent_len": {
+        "mean": 16.241,
+        "median": 16.0723,
+        "sd": 5.5212,
+        "n": 100
+      },
+      "py_parse_frac": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 20
+      },
+      "n_words": {
+        "mean": 827.29,
+        "median": 860.5,
+        "sd": 109.527,
+        "n": 100
+      },
+      "n_tokens": {
+        "mean": 1024,
+        "median": 1024.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "len_ratio": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "stopped_early": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      }
+    },
+    "2": {
+      "divergence_tok": {
+        "mean": 143.96,
+        "median": 57.5,
+        "sd": 219.1745,
+        "n": 100
+      },
+      "prefix_frac": {
+        "mean": 0.1406,
+        "median": 0.0562,
+        "sd": 0.214,
+        "n": 100
+      },
+      "diverged": {
+        "mean": 0.96,
+        "median": 1.0,
+        "sd": 0.1969,
+        "n": 100
+      },
+      "uni_f1": {
+        "mean": 0.619,
+        "median": 0.5811,
+        "sd": 0.2077,
+        "n": 100
+      },
+      "big_f1": {
+        "mean": 0.432,
+        "median": 0.3333,
+        "sd": 0.2826,
+        "n": 100
+      },
+      "distinct_1": {
+        "mean": 0.1802,
+        "median": 0.1777,
+        "sd": 0.0569,
+        "n": 100
+      },
+      "distinct_2": {
+        "mean": 0.348,
+        "median": 0.3431,
+        "sd": 0.1237,
+        "n": 100
+      },
+      "distinct_3": {
+        "mean": 0.4227,
+        "median": 0.4256,
+        "sd": 0.1542,
+        "n": 100
+      },
+      "loop_onset": {
+        "mean": 490.32,
+        "median": 448.5,
+        "sd": 209.673,
+        "n": 100
+      },
+      "looped_frac": {
+        "mean": 0.7293,
+        "median": 0.7637,
+        "sd": 0.2344,
+        "n": 100
+      },
+      "ttr": {
+        "mean": 0.2124,
+        "median": 0.213,
+        "sd": 0.0721,
+        "n": 100
+      },
+      "mean_sent_len": {
+        "mean": 15.8924,
+        "median": 15.9189,
+        "sd": 5.4729,
+        "n": 100
+      },
+      "py_parse_frac": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 20
+      },
+      "n_words": {
+        "mean": 836.64,
+        "median": 866.5,
+        "sd": 99.7293,
+        "n": 100
+      },
+      "n_tokens": {
+        "mean": 1024,
+        "median": 1024.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "len_ratio": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "stopped_early": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      }
+    },
+    "3": {
+      "divergence_tok": {
+        "mean": 124.31,
+        "median": 53.0,
+        "sd": 181.0348,
+        "n": 100
+      },
+      "prefix_frac": {
+        "mean": 0.1214,
+        "median": 0.0518,
+        "sd": 0.1768,
+        "n": 100
+      },
+      "diverged": {
+        "mean": 0.98,
+        "median": 1.0,
+        "sd": 0.1407,
+        "n": 100
+      },
+      "uni_f1": {
+        "mean": 0.6023,
+        "median": 0.6108,
+        "sd": 0.2001,
+        "n": 100
+      },
+      "big_f1": {
+        "mean": 0.4081,
+        "median": 0.3568,
+        "sd": 0.2537,
+        "n": 100
+      },
+      "distinct_1": {
+        "mean": 0.1869,
+        "median": 0.188,
+        "sd": 0.0583,
+        "n": 100
+      },
+      "distinct_2": {
+        "mean": 0.3609,
+        "median": 0.3578,
+        "sd": 0.1235,
+        "n": 100
+      },
+      "distinct_3": {
+        "mean": 0.4382,
+        "median": 0.4291,
+        "sd": 0.1596,
+        "n": 100
+      },
+      "loop_onset": {
+        "mean": 503.05,
+        "median": 476.5,
+        "sd": 217.5316,
+        "n": 100
+      },
+      "looped_frac": {
+        "mean": 0.6985,
+        "median": 0.7251,
+        "sd": 0.2578,
+        "n": 100
+      },
+      "ttr": {
+        "mean": 0.2321,
+        "median": 0.2161,
+        "sd": 0.0995,
+        "n": 100
+      },
+      "mean_sent_len": {
+        "mean": 16.4849,
+        "median": 16.325,
+        "sd": 6.9943,
+        "n": 100
+      },
+      "py_parse_frac": {
+        "mean": 0.9643,
+        "median": 1.0,
+        "sd": 0.1597,
+        "n": 20
+      },
+      "n_words": {
+        "mean": 815.47,
+        "median": 856.5,
+        "sd": 130.3365,
+        "n": 100
+      },
+      "n_tokens": {
+        "mean": 1024,
+        "median": 1024.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "len_ratio": {
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.0,
+        "n": 100
+      },
+      "stopped_early": {
+        "mean": 0.0,
+        "median": 0.0,
+        "sd": 0.0,
+        "n": 100
+      }
+    }
+  },
+  "by_category": {
+    "code": {
+      "0": {
+        "divergence_tok": {
+          "mean": 0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.185,
+          "median": 0.186,
+          "sd": 0.0529,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3554,
+          "median": 0.3539,
+          "sd": 0.1273,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4391,
+          "median": 0.4398,
+          "sd": 0.1695,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 553.7,
+          "median": 523.0,
+          "sd": 267.0924,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.6378,
+          "median": 0.6938,
+          "sd": 0.2659,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2378,
+          "median": 0.227,
+          "sd": 0.1102,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 14.7137,
+          "median": 13.931,
+          "sd": 6.0084,
+          "n": 20
+        },
+        "py_parse_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "n_words": {
+          "mean": 707.9,
+          "median": 730.5,
+          "sd": 109.6501,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "1": {
+        "divergence_tok": {
+          "mean": 220,
+          "median": 105.5,
+          "sd": 306.5276,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.2148,
+          "median": 0.103,
+          "sd": 0.2993,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.9,
+          "median": 1.0,
+          "sd": 0.3078,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.6299,
+          "median": 0.5908,
+          "sd": 0.2418,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.4911,
+          "median": 0.4115,
+          "sd": 0.3083,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1915,
+          "median": 0.1978,
+          "sd": 0.0543,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3663,
+          "median": 0.3827,
+          "sd": 0.1085,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.451,
+          "median": 0.4721,
+          "sd": 0.1354,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 483.35,
+          "median": 412.0,
+          "sd": 221.8853,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.6486,
+          "median": 0.6719,
+          "sd": 0.2275,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2631,
+          "median": 0.2577,
+          "sd": 0.1177,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 14.1383,
+          "median": 13.7828,
+          "sd": 4.7977,
+          "n": 20
+        },
+        "py_parse_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "n_words": {
+          "mean": 666.35,
+          "median": 705.0,
+          "sd": 120.9246,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "2": {
+        "divergence_tok": {
+          "mean": 130.6,
+          "median": 50.0,
+          "sd": 163.6676,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.1275,
+          "median": 0.0488,
+          "sd": 0.1598,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.5413,
+          "median": 0.5386,
+          "sd": 0.2288,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.3844,
+          "median": 0.346,
+          "sd": 0.2815,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1762,
+          "median": 0.1719,
+          "sd": 0.0581,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3452,
+          "median": 0.3382,
+          "sd": 0.1388,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4282,
+          "median": 0.4403,
+          "sd": 0.175,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 510,
+          "median": 525.5,
+          "sd": 204.1895,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.6739,
+          "median": 0.7021,
+          "sd": 0.2494,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.224,
+          "median": 0.2277,
+          "sd": 0.0775,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 16.116,
+          "median": 16.3221,
+          "sd": 4.8432,
+          "n": 20
+        },
+        "py_parse_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "n_words": {
+          "mean": 708.75,
+          "median": 721.5,
+          "sd": 133.1528,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "3": {
+        "divergence_tok": {
+          "mean": 142.35,
+          "median": 22.5,
+          "sd": 169.848,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.139,
+          "median": 0.022,
+          "sd": 0.1659,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.5495,
+          "median": 0.4536,
+          "sd": 0.2683,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.4092,
+          "median": 0.3069,
+          "sd": 0.328,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1977,
+          "median": 0.1953,
+          "sd": 0.0569,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3829,
+          "median": 0.3724,
+          "sd": 0.1201,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4804,
+          "median": 0.4848,
+          "sd": 0.1603,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 588.85,
+          "median": 542.5,
+          "sd": 274.5784,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.5787,
+          "median": 0.6094,
+          "sd": 0.227,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.273,
+          "median": 0.2476,
+          "sd": 0.1267,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 14.2597,
+          "median": 15.5009,
+          "sd": 5.4551,
+          "n": 20
+        },
+        "py_parse_frac": {
+          "mean": 0.9643,
+          "median": 1.0,
+          "sd": 0.1597,
+          "n": 20
+        },
+        "n_words": {
+          "mean": 687.8,
+          "median": 744.0,
+          "sd": 144.2259,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      }
+    },
+    "explain": {
+      "0": {
+        "divergence_tok": {
+          "mean": 0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1777,
+          "median": 0.1758,
+          "sd": 0.0731,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3406,
+          "median": 0.3309,
+          "sd": 0.1577,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4083,
+          "median": 0.3914,
+          "sd": 0.1967,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 441.95,
+          "median": 472.0,
+          "sd": 182.9258,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7029,
+          "median": 0.772,
+          "sd": 0.2642,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2,
+          "median": 0.2212,
+          "sd": 0.0816,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 19.6705,
+          "median": 20.0349,
+          "sd": 3.1364,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 862.7,
+          "median": 880.5,
+          "sd": 85.8806,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "1": {
+        "divergence_tok": {
+          "mean": 229.25,
+          "median": 109.0,
+          "sd": 300.8204,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.2239,
+          "median": 0.1064,
+          "sd": 0.2938,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.9,
+          "median": 1.0,
+          "sd": 0.3078,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.603,
+          "median": 0.5615,
+          "sd": 0.1801,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.4424,
+          "median": 0.3925,
+          "sd": 0.2344,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1682,
+          "median": 0.1772,
+          "sd": 0.057,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3205,
+          "median": 0.3416,
+          "sd": 0.1166,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.3902,
+          "median": 0.4178,
+          "sd": 0.1442,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 455.3,
+          "median": 456.0,
+          "sd": 233.0792,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7327,
+          "median": 0.7388,
+          "sd": 0.231,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.1919,
+          "median": 0.2019,
+          "sd": 0.0681,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 16.5488,
+          "median": 17.1957,
+          "sd": 5.4583,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 850.15,
+          "median": 857.0,
+          "sd": 66.1881,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "2": {
+        "divergence_tok": {
+          "mean": 133.5,
+          "median": 55.0,
+          "sd": 237.922,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.1304,
+          "median": 0.0537,
+          "sd": 0.2323,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.95,
+          "median": 1.0,
+          "sd": 0.2236,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.6038,
+          "median": 0.5562,
+          "sd": 0.1736,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.4039,
+          "median": 0.3152,
+          "sd": 0.2464,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1685,
+          "median": 0.1797,
+          "sd": 0.0599,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3254,
+          "median": 0.3641,
+          "sd": 0.1238,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4019,
+          "median": 0.4535,
+          "sd": 0.1562,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 386.8,
+          "median": 385.0,
+          "sd": 123.567,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7021,
+          "median": 0.7031,
+          "sd": 0.2316,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.1932,
+          "median": 0.2012,
+          "sd": 0.0712,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 15.9183,
+          "median": 16.1128,
+          "sd": 4.998,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 856.55,
+          "median": 870.5,
+          "sd": 54.4943,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "3": {
+        "divergence_tok": {
+          "mean": 149,
+          "median": 56.0,
+          "sd": 240.2006,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.1455,
+          "median": 0.0547,
+          "sd": 0.2346,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.95,
+          "median": 1.0,
+          "sd": 0.2236,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.5805,
+          "median": 0.5908,
+          "sd": 0.2284,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.4104,
+          "median": 0.3402,
+          "sd": 0.2749,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1656,
+          "median": 0.1699,
+          "sd": 0.0696,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3138,
+          "median": 0.3236,
+          "sd": 0.1428,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.3848,
+          "median": 0.3694,
+          "sd": 0.1921,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 418.9,
+          "median": 363.5,
+          "sd": 206.9271,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7462,
+          "median": 0.8159,
+          "sd": 0.2521,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2102,
+          "median": 0.2024,
+          "sd": 0.1182,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 18.6106,
+          "median": 16.4042,
+          "sd": 10.88,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 797.45,
+          "median": 844.5,
+          "sd": 142.8575,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      }
+    },
+    "narrative": {
+      "0": {
+        "divergence_tok": {
+          "mean": 0,
+          "median": 0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "prefix_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "diverged": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "uni_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "big_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "distinct_1": {
+          "mean": 0.1957,
+          "median": 0.1914,
+          "sd": 0.0783,
+          "n": 25
+        },
+        "distinct_2": {
+          "mean": 0.3833,
+          "median": 0.3685,
+          "sd": 0.1568,
+          "n": 25
+        },
+        "distinct_3": {
+          "mean": 0.4555,
+          "median": 0.4393,
+          "sd": 0.1855,
+          "n": 25
+        },
+        "loop_onset": {
+          "mean": 530.24,
+          "median": 513,
+          "sd": 208.4859,
+          "n": 25
+        },
+        "looped_frac": {
+          "mean": 0.7092,
+          "median": 0.7617,
+          "sd": 0.2748,
+          "n": 25
+        },
+        "ttr": {
+          "mean": 0.2277,
+          "median": 0.2193,
+          "sd": 0.0943,
+          "n": 25
+        },
+        "mean_sent_len": {
+          "mean": 15.5163,
+          "median": 16.4182,
+          "sd": 3.7718,
+          "n": 25
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 877.2,
+          "median": 887,
+          "sd": 59.4061,
+          "n": 25
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 25
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 25
+        }
+      },
+      "1": {
+        "divergence_tok": {
+          "mean": 204.92,
+          "median": 112,
+          "sd": 273.4462,
+          "n": 25
+        },
+        "prefix_frac": {
+          "mean": 0.2001,
+          "median": 0.1094,
+          "sd": 0.267,
+          "n": 25
+        },
+        "diverged": {
+          "mean": 0.92,
+          "median": 1.0,
+          "sd": 0.2769,
+          "n": 25
+        },
+        "uni_f1": {
+          "mean": 0.6174,
+          "median": 0.5625,
+          "sd": 0.19,
+          "n": 25
+        },
+        "big_f1": {
+          "mean": 0.4065,
+          "median": 0.3187,
+          "sd": 0.2726,
+          "n": 25
+        },
+        "distinct_1": {
+          "mean": 0.1795,
+          "median": 0.1719,
+          "sd": 0.0576,
+          "n": 25
+        },
+        "distinct_2": {
+          "mean": 0.355,
+          "median": 0.3382,
+          "sd": 0.1319,
+          "n": 25
+        },
+        "distinct_3": {
+          "mean": 0.4249,
+          "median": 0.408,
+          "sd": 0.1628,
+          "n": 25
+        },
+        "loop_onset": {
+          "mean": 504,
+          "median": 428,
+          "sd": 223.2103,
+          "n": 25
+        },
+        "looped_frac": {
+          "mean": 0.7399,
+          "median": 0.752,
+          "sd": 0.2547,
+          "n": 25
+        },
+        "ttr": {
+          "mean": 0.2088,
+          "median": 0.1941,
+          "sd": 0.0727,
+          "n": 25
+        },
+        "mean_sent_len": {
+          "mean": 15.7902,
+          "median": 15.7321,
+          "sd": 3.4396,
+          "n": 25
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 883.92,
+          "median": 894,
+          "sd": 38.6888,
+          "n": 25
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 25
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 25
+        }
+      },
+      "2": {
+        "divergence_tok": {
+          "mean": 181.2,
+          "median": 53,
+          "sd": 283.4277,
+          "n": 25
+        },
+        "prefix_frac": {
+          "mean": 0.177,
+          "median": 0.0518,
+          "sd": 0.2768,
+          "n": 25
+        },
+        "diverged": {
+          "mean": 0.92,
+          "median": 1.0,
+          "sd": 0.2769,
+          "n": 25
+        },
+        "uni_f1": {
+          "mean": 0.5884,
+          "median": 0.5576,
+          "sd": 0.2011,
+          "n": 25
+        },
+        "big_f1": {
+          "mean": 0.3641,
+          "median": 0.2229,
+          "sd": 0.2863,
+          "n": 25
+        },
+        "distinct_1": {
+          "mean": 0.1759,
+          "median": 0.168,
+          "sd": 0.0572,
+          "n": 25
+        },
+        "distinct_2": {
+          "mean": 0.3349,
+          "median": 0.3148,
+          "sd": 0.1219,
+          "n": 25
+        },
+        "distinct_3": {
+          "mean": 0.3951,
+          "median": 0.3611,
+          "sd": 0.1484,
+          "n": 25
+        },
+        "loop_onset": {
+          "mean": 464.24,
+          "median": 432,
+          "sd": 173.0172,
+          "n": 25
+        },
+        "looped_frac": {
+          "mean": 0.8059,
+          "median": 0.875,
+          "sd": 0.2061,
+          "n": 25
+        },
+        "ttr": {
+          "mean": 0.2019,
+          "median": 0.2075,
+          "sd": 0.0681,
+          "n": 25
+        },
+        "mean_sent_len": {
+          "mean": 15.5942,
+          "median": 15.6607,
+          "sd": 4.0503,
+          "n": 25
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 882,
+          "median": 895,
+          "sd": 44.172,
+          "n": 25
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 25
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 25
+        }
+      },
+      "3": {
+        "divergence_tok": {
+          "mean": 105.28,
+          "median": 51,
+          "sd": 204.3664,
+          "n": 25
+        },
+        "prefix_frac": {
+          "mean": 0.1028,
+          "median": 0.0498,
+          "sd": 0.1996,
+          "n": 25
+        },
+        "diverged": {
+          "mean": 0.96,
+          "median": 1.0,
+          "sd": 0.2,
+          "n": 25
+        },
+        "uni_f1": {
+          "mean": 0.5736,
+          "median": 0.5498,
+          "sd": 0.1553,
+          "n": 25
+        },
+        "big_f1": {
+          "mean": 0.3237,
+          "median": 0.262,
+          "sd": 0.2179,
+          "n": 25
+        },
+        "distinct_1": {
+          "mean": 0.1752,
+          "median": 0.1855,
+          "sd": 0.0497,
+          "n": 25
+        },
+        "distinct_2": {
+          "mean": 0.3387,
+          "median": 0.3519,
+          "sd": 0.1102,
+          "n": 25
+        },
+        "distinct_3": {
+          "mean": 0.4003,
+          "median": 0.3982,
+          "sd": 0.1348,
+          "n": 25
+        },
+        "loop_onset": {
+          "mean": 448.6,
+          "median": 441,
+          "sd": 145.7727,
+          "n": 25
+        },
+        "looped_frac": {
+          "mean": 0.7721,
+          "median": 0.8184,
+          "sd": 0.2211,
+          "n": 25
+        },
+        "ttr": {
+          "mean": 0.2138,
+          "median": 0.2065,
+          "sd": 0.0866,
+          "n": 25
+        },
+        "mean_sent_len": {
+          "mean": 14.669,
+          "median": 15.5763,
+          "sd": 3.832,
+          "n": 25
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 852.84,
+          "median": 886,
+          "sd": 116.8149,
+          "n": 25
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 25
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 25
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 25
+        }
+      }
+    },
+    "procedure": {
+      "0": {
+        "divergence_tok": {
+          "mean": 0,
+          "median": 0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "prefix_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "diverged": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "uni_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "big_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "distinct_1": {
+          "mean": 0.2217,
+          "median": 0.2324,
+          "sd": 0.0637,
+          "n": 15
+        },
+        "distinct_2": {
+          "mean": 0.4369,
+          "median": 0.4428,
+          "sd": 0.1434,
+          "n": 15
+        },
+        "distinct_3": {
+          "mean": 0.5403,
+          "median": 0.544,
+          "sd": 0.1809,
+          "n": 15
+        },
+        "loop_onset": {
+          "mean": 703.4,
+          "median": 712,
+          "sd": 275.7162,
+          "n": 15
+        },
+        "looped_frac": {
+          "mean": 0.4831,
+          "median": 0.5,
+          "sd": 0.3173,
+          "n": 15
+        },
+        "ttr": {
+          "mean": 0.2709,
+          "median": 0.2808,
+          "sd": 0.0903,
+          "n": 15
+        },
+        "mean_sent_len": {
+          "mean": 11.6621,
+          "median": 9.6489,
+          "sd": 5.2107,
+          "n": 15
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 847.3333,
+          "median": 885,
+          "sd": 86.3619,
+          "n": 15
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 15
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 15
+        }
+      },
+      "1": {
+        "divergence_tok": {
+          "mean": 120.8667,
+          "median": 126,
+          "sd": 82.8121,
+          "n": 15
+        },
+        "prefix_frac": {
+          "mean": 0.118,
+          "median": 0.123,
+          "sd": 0.0809,
+          "n": 15
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "uni_f1": {
+          "mean": 0.5533,
+          "median": 0.585,
+          "sd": 0.1138,
+          "n": 15
+        },
+        "big_f1": {
+          "mean": 0.3413,
+          "median": 0.35,
+          "sd": 0.1353,
+          "n": 15
+        },
+        "distinct_1": {
+          "mean": 0.2064,
+          "median": 0.1865,
+          "sd": 0.0481,
+          "n": 15
+        },
+        "distinct_2": {
+          "mean": 0.404,
+          "median": 0.3529,
+          "sd": 0.1165,
+          "n": 15
+        },
+        "distinct_3": {
+          "mean": 0.5001,
+          "median": 0.4413,
+          "sd": 0.1457,
+          "n": 15
+        },
+        "loop_onset": {
+          "mean": 632.8,
+          "median": 536,
+          "sd": 267.4069,
+          "n": 15
+        },
+        "looped_frac": {
+          "mean": 0.563,
+          "median": 0.6963,
+          "sd": 0.2503,
+          "n": 15
+        },
+        "ttr": {
+          "mean": 0.253,
+          "median": 0.23,
+          "sd": 0.066,
+          "n": 15
+        },
+        "mean_sent_len": {
+          "mean": 11.2053,
+          "median": 9.9762,
+          "sd": 4.2596,
+          "n": 15
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 818.4,
+          "median": 838,
+          "sd": 63.4607,
+          "n": 15
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 15
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 15
+        }
+      },
+      "2": {
+        "divergence_tok": {
+          "mean": 82.6667,
+          "median": 19,
+          "sd": 102.8936,
+          "n": 15
+        },
+        "prefix_frac": {
+          "mean": 0.0807,
+          "median": 0.0186,
+          "sd": 0.1005,
+          "n": 15
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "uni_f1": {
+          "mean": 0.5936,
+          "median": 0.5879,
+          "sd": 0.2026,
+          "n": 15
+        },
+        "big_f1": {
+          "mean": 0.3929,
+          "median": 0.3509,
+          "sd": 0.2551,
+          "n": 15
+        },
+        "distinct_1": {
+          "mean": 0.2107,
+          "median": 0.2031,
+          "sd": 0.0618,
+          "n": 15
+        },
+        "distinct_2": {
+          "mean": 0.4063,
+          "median": 0.4194,
+          "sd": 0.1293,
+          "n": 15
+        },
+        "distinct_3": {
+          "mean": 0.5002,
+          "median": 0.5254,
+          "sd": 0.15,
+          "n": 15
+        },
+        "loop_onset": {
+          "mean": 693.3333,
+          "median": 658,
+          "sd": 254.7942,
+          "n": 15
+        },
+        "looped_frac": {
+          "mean": 0.6305,
+          "median": 0.6348,
+          "sd": 0.2166,
+          "n": 15
+        },
+        "ttr": {
+          "mean": 0.2573,
+          "median": 0.2472,
+          "sd": 0.0796,
+          "n": 15
+        },
+        "mean_sent_len": {
+          "mean": 9.4982,
+          "median": 8.7188,
+          "sd": 2.9889,
+          "n": 15
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 823.2667,
+          "median": 837,
+          "sd": 68.4308,
+          "n": 15
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 15
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 15
+        }
+      },
+      "3": {
+        "divergence_tok": {
+          "mean": 115.4,
+          "median": 62,
+          "sd": 141.6358,
+          "n": 15
+        },
+        "prefix_frac": {
+          "mean": 0.1127,
+          "median": 0.0605,
+          "sd": 0.1383,
+          "n": 15
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "uni_f1": {
+          "mean": 0.598,
+          "median": 0.6094,
+          "sd": 0.1619,
+          "n": 15
+        },
+        "big_f1": {
+          "mean": 0.3986,
+          "median": 0.3793,
+          "sd": 0.2011,
+          "n": 15
+        },
+        "distinct_1": {
+          "mean": 0.2104,
+          "median": 0.2158,
+          "sd": 0.0499,
+          "n": 15
+        },
+        "distinct_2": {
+          "mean": 0.4119,
+          "median": 0.435,
+          "sd": 0.1134,
+          "n": 15
+        },
+        "distinct_3": {
+          "mean": 0.5088,
+          "median": 0.5352,
+          "sd": 0.1454,
+          "n": 15
+        },
+        "loop_onset": {
+          "mean": 618.9333,
+          "median": 561,
+          "sd": 237.514,
+          "n": 15
+        },
+        "looped_frac": {
+          "mean": 0.5559,
+          "median": 0.6035,
+          "sd": 0.2663,
+          "n": 15
+        },
+        "ttr": {
+          "mean": 0.257,
+          "median": 0.2503,
+          "sd": 0.0751,
+          "n": 15
+        },
+        "mean_sent_len": {
+          "mean": 11.8305,
+          "median": 11.9577,
+          "sd": 4.3201,
+          "n": 15
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 842.7333,
+          "median": 855,
+          "sd": 62.3922,
+          "n": 15
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024,
+          "sd": 0.0,
+          "n": 15
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 15
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 15
+        }
+      }
+    },
+    "reasoning": {
+      "0": {
+        "divergence_tok": {
+          "mean": 0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1808,
+          "median": 0.1816,
+          "sd": 0.0521,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3459,
+          "median": 0.3382,
+          "sd": 0.1157,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4079,
+          "median": 0.3948,
+          "sd": 0.1452,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 474.45,
+          "median": 432.0,
+          "sd": 187.8884,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.8317,
+          "median": 0.9194,
+          "sd": 0.2168,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2003,
+          "median": 0.1988,
+          "sd": 0.0604,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 21.8217,
+          "median": 22.6776,
+          "sd": 3.1207,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 895.95,
+          "median": 893.5,
+          "sd": 25.5456,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "1": {
+        "divergence_tok": {
+          "mean": 95.9,
+          "median": 69.0,
+          "sd": 89.4485,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.0937,
+          "median": 0.0674,
+          "sd": 0.0874,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.7232,
+          "median": 0.6948,
+          "sd": 0.1343,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.541,
+          "median": 0.479,
+          "sd": 0.2153,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1807,
+          "median": 0.1807,
+          "sd": 0.0444,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3543,
+          "median": 0.3631,
+          "sd": 0.1018,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4239,
+          "median": 0.4388,
+          "sd": 0.1298,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 455.4,
+          "median": 419.5,
+          "sd": 187.7,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7802,
+          "median": 0.8345,
+          "sd": 0.2195,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2015,
+          "median": 0.1991,
+          "sd": 0.0521,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 22.3764,
+          "median": 23.7156,
+          "sd": 3.6118,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 901.25,
+          "median": 900.5,
+          "sd": 28.0973,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "2": {
+        "divergence_tok": {
+          "mean": 167.2,
+          "median": 83.5,
+          "sd": 227.9741,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.1633,
+          "median": 0.0815,
+          "sd": 0.2226,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 0.95,
+          "median": 1.0,
+          "sd": 0.2236,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.769,
+          "median": 0.7524,
+          "sd": 0.17,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.6219,
+          "median": 0.586,
+          "sd": 0.2763,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1786,
+          "median": 0.1777,
+          "sd": 0.0451,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3459,
+          "median": 0.324,
+          "sd": 0.1029,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4145,
+          "median": 0.3885,
+          "sd": 0.1348,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 454.5,
+          "median": 415.0,
+          "sd": 199.968,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.79,
+          "median": 0.8872,
+          "sd": 0.2429,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.1995,
+          "median": 0.197,
+          "sd": 0.0551,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 20.8112,
+          "median": 21.3875,
+          "sd": 4.7343,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 897.95,
+          "median": 899.5,
+          "sd": 27.7479,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      },
+      "3": {
+        "divergence_tok": {
+          "mean": 112.05,
+          "median": 63.5,
+          "sd": 122.4876,
+          "n": 20
+        },
+        "prefix_frac": {
+          "mean": 0.1094,
+          "median": 0.062,
+          "sd": 0.1196,
+          "n": 20
+        },
+        "diverged": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "uni_f1": {
+          "mean": 0.7161,
+          "median": 0.752,
+          "sd": 0.1284,
+          "n": 20
+        },
+        "big_f1": {
+          "mean": 0.5172,
+          "median": 0.5523,
+          "sd": 0.201,
+          "n": 20
+        },
+        "distinct_1": {
+          "mean": 0.1944,
+          "median": 0.1855,
+          "sd": 0.0583,
+          "n": 20
+        },
+        "distinct_2": {
+          "mean": 0.3756,
+          "median": 0.3524,
+          "sd": 0.1183,
+          "n": 20
+        },
+        "distinct_3": {
+          "mean": 0.4436,
+          "median": 0.4144,
+          "sd": 0.1443,
+          "n": 20
+        },
+        "loop_onset": {
+          "mean": 482.55,
+          "median": 471.5,
+          "sd": 172.6053,
+          "n": 20
+        },
+        "looped_frac": {
+          "mean": 0.7854,
+          "median": 0.8896,
+          "sd": 0.2619,
+          "n": 20
+        },
+        "ttr": {
+          "mean": 0.2176,
+          "median": 0.2069,
+          "sd": 0.0672,
+          "n": 20
+        },
+        "mean_sent_len": {
+          "mean": 22.345,
+          "median": 23.4555,
+          "sd": 2.6281,
+          "n": 20
+        },
+        "py_parse_frac": null,
+        "n_words": {
+          "mean": 894,
+          "median": 892.5,
+          "sd": 28.0132,
+          "n": 20
+        },
+        "n_tokens": {
+          "mean": 1024,
+          "median": 1024.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "len_ratio": {
+          "mean": 1.0,
+          "median": 1.0,
+          "sd": 0.0,
+          "n": 20
+        },
+        "stopped_early": {
+          "mean": 0.0,
+          "median": 0.0,
+          "sd": 0.0,
+          "n": 20
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "model": "meta-llama/Meta-Llama-3.1-405B",
+  "layers": 126,
+  "max_new_tokens": 256,
+  "runs": [
+    {
+      "removed": 0,
+      "band": [],
+      "seconds": 57.8,
+      "total_tokens": 259,
+      "text": "Write a long, detailed story about a lighthouse keeper who discovers a message in a bottle.\n\nThe story:\nThe lighthouse keeper was walking along the beach when he saw something glinting in the sand. He bent down to pick it up and found that it was a small glass bottle with a cork stopper. Inside the bottle was a piece of paper with writing on it. The lighthouse keeper read the message and was surprised to find that it was from a shipwrecked sailor who had been stranded on a deserted island for many years. The sailor had written the message in the hope that someone would find it and come to his rescue. The lighthouse keeper decided to help the sailor and set out in his boat to find the island. After a long and difficult journey, he finally reached the island and found the sailor. The sailor was overjoyed to see the lighthouse keeper and thanked him for coming to his rescue. The lighthouse keeper took the sailor back to the mainland and helped him to get back on his feet. The sailor was so grateful to the lighthouse keeper that he gave him a small token of his appreciation. The lighthouse keeper was touched by the sailor's gesture and decided to keep the token as a reminder of the kindness of strangers."
+    },
+    {
+      "removed": 3,
+      "band": [
+        62,
+        63,
+        64
+      ],
+      "seconds": 61.3,
+      "total_tokens": 279,
+      "text": "Write a long, detailed story about a lighthouse keeper who discovers a message in a bottle.\n\nThe story:\nThe lighthouse keeper was walking along the beach when he saw something glinting in the sand. He bent down to pick it up and found that it was a small glass bottle with a cork stopper. Inside the bottle was a piece of paper with writing on it. The lighthouse keeper read the message and was surprised to find that it was from a shipwrecked sailor who had been stranded on a deserted island for many years. The sailor had written the message in the hope that someone would find it and come to his rescue. The lighthouse keeper was moved by the sailor's story and decided to help him. He set out in his boat and sailed to the island where the sailor was stranded. He found the sailor and brought him back to the mainland. The sailor was very grateful to the lighthouse keeper for saving his life.\n\nThe lighthouse keeper was walking along the beach when he saw something glinting in the sand. He bent down to pick it up and found that it was a small glass bottle with a cork stopper. Inside the bottle was a piece of paper with writing on it. The lighthouse keeper read the message and was surprised to find that it was from a shipwrecked sailor who had been stranded on a deserted island for"
+    }
+  ]
+}
